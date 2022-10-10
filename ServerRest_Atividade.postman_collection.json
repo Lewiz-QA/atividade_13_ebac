@@ -1,0 +1,1545 @@
+{
+	"info": {
+		"_postman_id": "ece91779-54b2-403e-993d-fb31b80d1f01",
+		"name": "ServerRest_Atividade",
+		"description": "1.  Executar npx serverest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12694936"
+	},
+	"item": [
+		{
+			"name": "Usuários",
+			"item": [
+				{
+					"name": "Cenários Negativos",
+					"item": [
+						{
+							"name": "Sem dados obrigatórios",
+							"item": [
+								{
+									"name": "Cadastrar usuário",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Verificar se o Status Code é 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de falha\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"obrigatório\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_base}}/usuarios",
+											"host": [
+												"{{url_base}}"
+											],
+											"path": [
+												"usuarios"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Editar usuário",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Verificar se o Status Code é 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de falha\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"obrigatório\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_base}}/usuarios/{{id_user}}",
+											"host": [
+												"{{url_base}}"
+											],
+											"path": [
+												"usuarios",
+												"{{id_user}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Excluir usuário",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Verificar se o Status Code é 405\", function () {\r",
+													"    pm.response.to.have.status(405);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de falha\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Não é possível realizar DELETE\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_base}}/usuarios/",
+											"host": [
+												"{{url_base}}"
+											],
+											"path": [
+												"usuarios",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"/*const getTokenRequest = {",
+											"  method: 'POST',",
+											"  url: pm.environment.get(\"url_login\"),",
+											"  header: {",
+											"    'Content-Type': 'application/json'",
+											"  },",
+											"  body: {",
+											"      mode: 'application/json',",
+											"      raw: JSON.stringify({",
+											"        'email': 'tester@qa.com.br',",
+											"        'password': 'teste'",
+											"      })",
+											"    },",
+											"};",
+											"",
+											"pm.sendRequest(getTokenRequest, (error, response) => {",
+											"    ",
+											"    if(error) {",
+											"        console.log(\"Pre-request não executado\")",
+											"    } ",
+											"    else {",
+											"    pm.expect(response).to.have.property('code', 200)",
+											"    pm.environment.set(\"token\", response.json().authorization);",
+											"    }",
+											"",
+											"});*/"
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Dados inválidos",
+							"item": [
+								{
+									"name": "Listar usuários cadastrados",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Verificar se o Status Code é 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de falha\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"id não é permitido\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_base}}/usuarios?id=0uxuPY0cbmQhpEz1",
+											"host": [
+												"{{url_base}}"
+											],
+											"path": [
+												"usuarios"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "0uxuPY0cbmQhpEz1"
+												},
+												{
+													"key": "nome",
+													"value": "Fulano da Silva",
+													"disabled": true
+												},
+												{
+													"key": "email",
+													"value": "fulano@qa.com",
+													"disabled": true
+												},
+												{
+													"key": "password",
+													"value": "teste",
+													"disabled": true
+												},
+												{
+													"key": "administrador",
+													"value": "true",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Cadastrar usuário",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Verificar se o Status Code é 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagens de falha\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"email deve ser um email válido\", \"administrador deve ser 'true' ou 'false\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"nome\": \"João Flávio Autopeças e Mecânica LTDA\",\r\n  \"email\": \"luizqa.com\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_base}}/usuarios",
+											"host": [
+												"{{url_base}}"
+											],
+											"path": [
+												"usuarios"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Buscar usuário pelo ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Verificar se o Status Code é 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de falha\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Usuário não encontrado\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_base}}/usuarios/teste",
+											"host": [
+												"{{url_base}}"
+											],
+											"path": [
+												"usuarios",
+												"teste"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Editar usuário",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Verificar se o Status Code é 200 ou 201\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de sucesso\", function () {\r",
+													"    const responseText = pm.response.text();\r",
+													"    const hasItemDetails = (responseText.includes('Registro alterado com sucesso') || responseText.includes('Cadastro realizado com sucesso'));\r",
+													"\r",
+													"    pm.expect(hasItemDetails).to.be.true;\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.test(\"Verificar se o Status Code é 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagens de falha\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"email deve ser um email válido\", \"administrador deve ser 'true' ou 'false\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"nome\": \"Jorge da Silva\",\r\n  \"email\": \"jorgeqa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"no\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_base}}/usuarios/{{id_user}}",
+											"host": [
+												"{{url_base}}"
+											],
+											"path": [
+												"usuarios",
+												"{{id_user}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"/*const getTokenRequest = {",
+											"  method: 'POST',",
+											"  url: pm.environment.get(\"url_login\"),",
+											"  header: {",
+											"    'Content-Type': 'application/json'",
+											"  },",
+											"  body: {",
+											"      mode: 'application/json',",
+											"      raw: JSON.stringify({",
+											"        'email': 'tester@qa.com.br',",
+											"        'password': 'teste'",
+											"      })",
+											"    },",
+											"};",
+											"",
+											"pm.sendRequest(getTokenRequest, (error, response) => {",
+											"    ",
+											"    if(error) {",
+											"        console.log(\"Pre-request não executado\")",
+											"    } ",
+											"    else {",
+											"    pm.expect(response).to.have.property('code', 200)",
+											"    pm.environment.set(\"token\", response.json().authorization);",
+											"    }",
+											"",
+											"});*/"
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Validar Regras do Swagger",
+							"item": [
+								{
+									"name": "Cadastrar com e-mail já utilizado",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Verificar se o Status Code é 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de falha\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Este email já está sendo usado\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"nome\": \"Luiz da Silva Jr.\",\r\n  \"email\": \"john@qa.com\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_base}}/usuarios",
+											"host": [
+												"{{url_base}}"
+											],
+											"path": [
+												"usuarios"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Editar - E-mail já utilizado",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Verificar se o Status Code é 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de falha\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Este email já está sendo usado\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nome\": \"Luiz da Silva\",\r\n    \"email\": \"luiz@qa.com\",\r\n    \"password\": \"teste\",\r\n    \"administrador\": \"true\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_base}}/usuarios/{{id_user}}",
+											"host": [
+												"{{url_base}}"
+											],
+											"path": [
+												"usuarios",
+												"{{id_user}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Editar - Cadastrar se for informado ID inexistente",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Verificar se o Status code é 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de sucesso\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"nome\": \"Jorge da Silva\",\r\n  \"email\": \"jorge@qa.org\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_base}}/usuarios/teste",
+											"host": [
+												"{{url_base}}"
+											],
+											"path": [
+												"usuarios",
+												"teste"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Excluir - Quando há vínculo com carrinho",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Verificar se o Status Code é 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verificar mensagem de falha\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Não é permitido excluir usuário com carrinho cadastrado\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url_base}}/usuarios/yuonl8Rr9st0QWUR",
+											"host": [
+												"{{url_base}}"
+											],
+											"path": [
+												"usuarios",
+												"yuonl8Rr9st0QWUR"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Listar usuários cadastrados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verificar se o Status Code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de sucesso\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"quantidade\", \"usuarios\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se o tempo de resposta é menor que 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/usuarios",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"usuarios"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "0uxuPY0cbmQhpEz1",
+									"disabled": true
+								},
+								{
+									"key": "nome",
+									"value": "Fulano da Silva",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "fulano@qa.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "teste",
+									"disabled": true
+								},
+								{
+									"key": "administrador",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar usuário",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verificar se o Status Code é 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de sucesso\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se o tempo de resposta é menor que 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"const resposta = pm.response.json();\r",
+									"pm.environment.set(\"id_user\", resposta._id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Luiz Soares Jr.\",\r\n  \"email\": \"lewizjr@qe.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/usuarios",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar usuário pelo ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verificar se o Status Code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de sucesso\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"nome\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se o tempo de resposta é menor que 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/usuarios/{{id_user}}",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"usuarios",
+								"{{id_user}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verificar se o Status Code é 200 ou 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de sucesso\", function () {\r",
+									"    const responseText = pm.response.text();\r",
+									"    const hasItemDetails = (responseText.includes('Registro alterado com sucesso') || responseText.includes('Cadastro realizado com sucesso'));\r",
+									"\r",
+									"    pm.expect(hasItemDetails).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se o tempo de resposta é menor que 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Maria da Silva\",\r\n  \"email\": \"mary@qe.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/usuarios/{{id_user}}",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"usuarios",
+								"{{id_user}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verificar se o Status Code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de sucesso\", function () {\r",
+									"    const responseText = pm.response.text();\r",
+									"    const hasItemDetails = (responseText.includes('Registro excluído com sucesso') || responseText.includes('Nenhum registro excluído'));\r",
+									"\r",
+									"    pm.expect(hasItemDetails).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se o tempo de resposta é menor que 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/usuarios/{{id_user}}",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"usuarios",
+								"{{id_user}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Produtos",
+			"item": [
+				{
+					"name": "Listar Produtos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar produto da lista\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Samsung 60 polegadas\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/produtos",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Produto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar mensagem de sucesso\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code é 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Microsoft Keyboard\",\r\n  \"preco\": 470,\r\n  \"descricao\": \"Teclado\",\r\n  \"quantidade\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/produtos",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Carregar Produto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/produtos/95fH1DNZN4zvxNjv",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"produtos",
+								"95fH1DNZN4zvxNjv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Produto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar mensagem\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Registro alterado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Delux Vertical\",\r\n  \"preco\": 4700,\r\n  \"descricao\": \"Mouse\",\r\n  \"quantidade\": 10000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/produtos/95fH1DNZN4zvxNjv",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"produtos",
+								"95fH1DNZN4zvxNjv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Produto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar mensagem\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"registro excluído\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/produtos/XOpyOTR6i7CccMlG",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"produtos",
+								"XOpyOTR6i7CccMlG"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Carrinhos",
+			"item": [
+				{
+					"name": "Listar carrinhos cadastrados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/carrinhos",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"carrinhos"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "precoTotal",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "quantidadeTotal",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "idUsuario",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar carrinho",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"BeeJh5lz3k6kSIzA\",\r\n      \"quantidade\": 1\r\n    },\r\n    {\r\n      \"idProduto\": \"K6leHdftCeOJj8BJ\",\r\n      \"quantidade\": 3\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/carrinhos",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"carrinhos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar carrinho por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/carrinhos/id",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"carrinhos",
+								"id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir carrinho",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_base}}/carrinhos/concluir-compra",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"carrinhos",
+								"concluir-compra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir carrinho e retornar produtos para estoque",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_base}}/carrinhos/cancelar-compra",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"carrinhos",
+								"cancelar-compra"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verificar se o Status code é 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verificar se o Content-Type está presente\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"const resposta = pm.response.json();\r",
+							"pm.environment.set(\"token\", resposta.authorization);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"luiz@qa.com\",\r\n  \"password\": \"teste\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_login}}",
+					"host": [
+						"{{url_login}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"/*const getTokenRequest = {",
+					"  method: 'POST',",
+					"  url: pm.environment.get(\"url_login\"),",
+					"  header: {",
+					"    'Content-Type': 'application/json'",
+					"  },",
+					"  body: {",
+					"      mode: 'application/json',",
+					"      raw: JSON.stringify({",
+					"        'email': 'tester@qa.com.br',",
+					"        'password': 'teste'",
+					"      })",
+					"    },",
+					"};",
+					"",
+					"pm.sendRequest(getTokenRequest, (error, response) => {",
+					"    ",
+					"    if(error) {",
+					"        console.log(\"Pre-request não executado\")",
+					"    } ",
+					"    else {",
+					"    pm.expect(response).to.have.property('code', 200)",
+					"    pm.environment.set(\"token\", response.json().authorization);",
+					"    }",
+					"",
+					"});*/"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
